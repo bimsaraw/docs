@@ -1,0 +1,27 @@
+---
+title: "Models"
+description: "Enable chat models for the organization and optionally add provider API keys."
+icon: "cpu"
+keywords: ["models", "llm", "byok", "chat"]
+related: ["guides/chat", "admin/billing"]
+---
+
+Administrators choose which chat models the organization may use, and optionally supply provider API keys.
+
+## Enable models
+
+Go to **Admin Center** → **Models**.
+
+Your plan includes model **bands** (for example Standard or Advanced). Only models in allowed bands can be turned on. Enable the models people should see in Chat, and pick a default.
+
+Save before leaving the page. Users only see models you enabled, and group settings can narrow that list further for the User role.
+
+## Bring your own key
+
+On plans that include BYOK, you can store provider credentials for the organization instead of using platform keys. Add or replace a key per provider on the Models page. Deleting a key removes that provider until you add another.
+
+<Warning>
+  Keys are stored encrypted for the organization. Do not paste keys into chat or documents.
+</Warning>
+
+If a model is listed but locked, the current plan band does not include it. Upgrade on **Plan & usage** or pick a model in an allowed band.

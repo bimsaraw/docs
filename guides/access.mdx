@@ -1,0 +1,50 @@
+---
+title: "Access and permissions"
+description: "How roles, groups, and classification ranks decide which documents you can see."
+icon: "shield-check"
+keywords: ["permissions", "groups", "classification", "roles", "access"]
+related: ["admin/roles", "admin/users-and-groups", "guides/chat"]
+---
+
+ScopeRAG enforces access before retrieval. Chat never returns passages from files outside your scope.
+
+## Roles
+
+| Role | Typical access |
+| --- | --- |
+| Owner | Full Admin Center, billing, and document management |
+| Administrator | Admin Center except owner-only organization changes; full document management |
+| User | Chat and Documents limited by group membership |
+
+Regular users do not open Admin Center. They still see **Billing** for plan and usage if they need it, but only owners and administrators can start checkout or open the Stripe portal.
+
+## Groups
+
+On the Team plan or higher, administrators put users into groups. Each group has:
+
+- **Classification level** — the highest sensitivity members may read
+- **Categories** — which parts of the library they can see
+- **Can create documents** — whether members may upload
+- **Allowed models** — which chat models they may select
+- **Members** — users in the group (administrators are not assigned as group members)
+
+A user can belong to more than one group. Access is the combination of those groups.
+
+<Info>
+  Group governance requires the Team plan or higher. On Free and Starter, invite people as needed and use classification plus categories on each file, but per-group category and model limits are a Team feature.
+</Info>
+
+## Classification ranks
+
+Administrators define named levels (for example Public, Internal, Confidential) with a numeric **rank**. Higher rank means more sensitive. A group's classification level is the ceiling for what those members can retrieve.
+
+When you upload, pick the level that matches the file. Do not mark sensitive content as a lower level to make it easier to find.
+
+## Chat filters vs permissions
+
+Composer filters (classification, category, tags) are optional and personal. They cannot override groups. If a document is missing:
+
+1. Confirm you are in a group that includes its category.
+2. Confirm the file's classification is at or below your group's level.
+3. Clear chat filters and ask again.
+4. Ask an administrator to check group settings in Admin Center.

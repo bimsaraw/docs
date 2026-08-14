@@ -1,0 +1,54 @@
+---
+title: "Introduction"
+description: "ScopeRAG answers questions over your organization's documents, limited to each user's allowed scope."
+icon: "book-open"
+keywords: ["scoperag", "introduction", "permissions", "rag"]
+related: ["quickstart", "guides/chat", "guides/documents"]
+---
+
+ScopeRAG helps your team find answers across company documents while respecting classification levels, group membership, and who is allowed to see what. Every answer stays within the signed-in user's approved scope.
+
+<Tip>
+  New to ScopeRAG? Follow the [Quickstart](/quickstart) to sign in, upload a file, and ask your first question.
+</Tip>
+
+## What you can do
+
+<Columns cols={2}>
+  <Card title="Ask over your documents" icon="message-square" href="/guides/chat">
+    Chat with organization knowledge. Answers include sources you can open and verify.
+  </Card>
+
+  <Card title="Upload and organize" icon="upload" href="/guides/documents">
+    Add PDF, Word, Excel, CSV, text, and Markdown files. Tag them with classification, categories, and tags.
+  </Card>
+
+  <Card title="Control who sees what" icon="shield" href="/guides/access">
+    Groups, classification ranks, and categories decide which files each person can retrieve.
+  </Card>
+
+  <Card title="Run the organization" icon="settings" href="/admin/roles">
+    Owners and administrators invite people, manage models, billing, and the audit log.
+  </Card>
+</Columns>
+
+## How access works
+
+ScopeRAG does not search the whole library for every user.
+
+- **Owners and administrators** can manage the organization and typically have broader document access.
+- **Users** only retrieve documents their groups allow: a classification level, selected categories, and optional upload permission.
+- **Chat filters** (classification, category, tags) further narrow retrieval, but they cannot expand access beyond your groups.
+
+<Info>
+  If a file does not appear in Documents or never shows up as a chat source, the usual cause is group access, not a missing search index.
+</Info>
+
+## Where to go next
+
+| Goal | Page |
+| --- | --- |
+| First answer in minutes | [Quickstart](/quickstart) |
+| Chat, models, citations | [Chat](/guides/chat) |
+| Upload and browse files | [Documents](/guides/documents) |
+| Invite people and set groups | [Users and groups](/admin/users-and-groups) |

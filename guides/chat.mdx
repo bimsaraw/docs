@@ -1,0 +1,51 @@
+---
+title: "Chat"
+description: "Ask questions over allowed documents, choose a model, filter retrieval, and verify citations."
+icon: "message-square"
+keywords: ["chat", "citations", "sources", "models", "filters"]
+related: ["quickstart", "guides/documents", "guides/access"]
+---
+
+Use Chat to ask questions over documents you are allowed to see. Answers are grounded in retrieved passages. ScopeRAG can still be wrong, so always open the sources.
+
+## Start a conversation
+
+<Steps>
+  <Step title="Open Chat">
+    After sign-in you land in Chat for your organization. Choose **New chat** in the sidebar for a fresh thread.
+  </Step>
+  <Step title="Pick a model">
+    Use the model selector if your organization enabled more than one. Administrators choose which models appear, and groups can further limit models for regular users.
+  </Step>
+  <Step title="Ask">
+    Type in the composer and send. The assistant streams a reply. You can leave the page; ScopeRAG continues generating in the background and the message updates when you return.
+  </Step>
+</Steps>
+
+## Narrow what is searched
+
+Open the filter control on the composer to limit retrieval to:
+
+- Classification levels
+- Categories
+- Tags
+
+Filters only hide documents. They never grant access to files outside your groups. Clear filters to search everything you are allowed to see.
+
+<Info>
+  Filters are remembered per conversation in the browser.
+</Info>
+
+## Read sources and citations
+
+Assistant messages can include a sources carousel. Select a source to open the cited document at the relevant passage.
+
+Use this to confirm the answer, compare wording, or follow up with a more specific question.
+
+<Warning>
+  If you do not see sources, the model may have answered without retrieval, the document may still be processing, or filters may have excluded every matching file.
+</Warning>
+
+## Conversations
+
+The sidebar lists your threads. Open one to continue, or delete a conversation you no longer need. Theme (light or dark) is available from the account menu.

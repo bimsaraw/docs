@@ -1,0 +1,41 @@
+---
+title: "Categories and classifications"
+description: "Set up categories, classification ranks, and tags for documents and chat filters."
+icon: "folder-tree"
+keywords: ["categories", "classifications", "tags", "taxonomy"]
+related: ["guides/documents", "admin/users-and-groups"]
+---
+
+Categories, classification levels, and tags are how files are organized and how chat filters work.
+
+## Categories
+
+Open **Admin Center** → **Categories**. Build a tree that matches how the organization thinks about knowledge (teams, products, regions, or policy types).
+
+Documents always belong to at least one category. If an uploader picks none, ScopeRAG uses **Uncategorized**.
+
+Plan limits cap how many categories you can create. Owners and administrators can also add a category from the Documents sidebar.
+
+## Classification levels
+
+Open **Classifications**. Each level has a **name** and a numeric **rank**. Higher rank means more sensitive.
+
+Example:
+
+| Name | Rank |
+| --- | --- |
+| Public | 0 |
+| Internal | 10 |
+| Confidential | 20 |
+
+Assign every uploaded file a level. Groups use a level as the maximum their members may read.
+
+## Tags
+
+Tags are free-form labels on documents. They do not grant access. They are useful in chat filters when you want a cross-cutting topic (for example `q4-policy` or `onboarding`) that is not a category.
+
+Create and attach tags while uploading or editing a document.
+
+<Info>
+  Changing a category or classification later does not automatically rewrite past chat answers. New questions use the updated metadata.
+</Info>

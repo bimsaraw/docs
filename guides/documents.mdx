@@ -1,0 +1,52 @@
+---
+title: "Documents"
+description: "Upload, classify, and browse organization files that ScopeRAG can retrieve."
+icon: "files"
+keywords: ["documents", "upload", "pdf", "categories", "tags"]
+related: ["quickstart", "guides/chat", "admin/taxonomy"]
+---
+
+Documents is the library of files ScopeRAG can retrieve from. Browse by category, upload new files, and edit metadata you own.
+
+## Open the library
+
+Go to **Documents**. The sidebar lists categories. Choose **All**, a category, or Uncategorized to filter the table.
+
+You only see files your access allows. Owners and administrators typically see the full library. Regular users see files in categories their groups include, at classification ranks they are allowed to read.
+
+## Upload files
+
+Choose **New Document**. You can add multiple files in one dialog.
+
+Supported types:
+
+- PDF (`.pdf`)
+- Word (`.docx`)
+- Excel (`.xlsx`)
+- CSV (`.csv`)
+- Plain text (`.txt`)
+- Markdown (`.md`)
+
+For each file, set:
+
+| Field | Purpose |
+| --- | --- |
+| Title | Display name in the library |
+| Classification | Sensitivity. Required. |
+| Categories | Where it lives in the taxonomy. Uncategorized is the default if you pick none. |
+| Tags | Optional labels for chat filters |
+| Metadata | Optional key-value pairs stored with the file |
+
+Wait for each item to finish uploading. Processing (text extraction and embedding) continues in the background. Chat retrieval starts after processing succeeds.
+
+<Warning>
+  Uploads stop if the organization is at its file count or storage limit. Owners and administrators can upgrade on **Plan & usage**.
+</Warning>
+
+## Edit or delete
+
+You can change metadata or delete a document if you uploaded it, or if you are an owner or administrator. Use the row actions in the table.
+
+## Categories from Documents
+
+Owners and administrators can create categories from the documents sidebar. Everyone else uses categories an administrator already defined.

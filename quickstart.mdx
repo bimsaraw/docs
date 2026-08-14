@@ -1,0 +1,68 @@
+---
+title: "Quickstart"
+description: "Create an account, upload a document, and get your first cited answer."
+icon: "play"
+keywords: ["quickstart", "sign in", "upload", "chat"]
+related: ["index", "guides/chat", "guides/documents"]
+---
+
+This walkthrough takes you from a new account to a cited answer over a document you uploaded.
+
+## Prerequisites
+
+- An email address you can open right now. Sign-in uses a magic link, not a password.
+- At least one file to upload: PDF, Word (`.docx`), Excel (`.xlsx`), CSV, text, or Markdown.
+- Permission to create documents. Owners and administrators can upload. Regular users need a group with **Can create documents** enabled.
+
+## Get started
+
+<Steps>
+  <Step title="Create your account">
+    Open `/register`, enter your work email, and choose **Create account**.
+
+    ScopeRAG emails a magic link. Open it on the same device you want to use. After verification you land in chat for your organization.
+
+    <Note>
+      Magic links expire after 15 minutes. If the link is invalid, request a new one from `/login`.
+    </Note>
+  </Step>
+  <Step title="Upload a document">
+    Go to **Documents** and choose **New Document**. Add one or more files, then set:
+
+    - **Classification** — sensitivity of the file
+    - **Categories** — folders in your taxonomy (Uncategorized is available by default)
+    - **Tags** — optional labels for later filtering
+
+    Wait until the file shows as uploaded. ScopeRAG processes it in the background before chat can retrieve it.
+  </Step>
+  <Step title="Ask a question">
+    Open **Chat**, pick a model if more than one is available, and ask something the document can answer.
+
+    Example: `What does this policy say about remote work?`
+
+    The assistant streams a reply. Sources appear under the message. Open a source to read the cited passage.
+  </Step>
+  <Step title="Invite your team">
+    If you are an owner or administrator, open **Admin Center** → **Users** and invite colleagues by email. Assign the **User** role and add them to groups so they only see the documents they should.
+  </Step>
+</Steps>
+
+<Check>
+  You should now have a conversation with at least one cited source from a file you uploaded.
+</Check>
+
+## If something is missing
+
+<AccordionGroup>
+  <Accordion title="I did not receive the magic link">
+    Check spam, then request another link from `/login`. The email is sent only if the address is eligible. Invited users receive a link when an administrator creates their account.
+  </Accordion>
+
+  <Accordion title="Upload is blocked">
+    Your plan may be at the file or storage limit, or your role cannot create documents. An administrator can raise the plan on **Plan & usage** or enable **Can create documents** on your group.
+  </Accordion>
+
+  <Accordion title="Chat has no sources">
+    Processing may still be running. Confirm the file appears in Documents, then ask again. Also check chat filters: an empty or overly narrow classification, category, or tag filter can hide the file.
+  </Accordion>
+</AccordionGroup>

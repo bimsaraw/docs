@@ -1,0 +1,52 @@
+---
+title: "Admin Center"
+description: "What owners and administrators can manage in Admin Center."
+icon: "settings"
+keywords: ["admin", "roles", "owner", "administrator"]
+related: ["admin/users-and-groups", "guides/access"]
+sidebarTitle: "Overview"
+---
+
+Admin Center is for organization owners and administrators. Use it to manage people, access, models, billing, and taxonomy.
+
+Open **Admin Center** from the account menu. Members with the User role cannot access these pages.
+
+## What each section is for
+
+| Section | Use it to |
+| --- | --- |
+| Organizations | View and update organization details |
+| Plan & usage | See credits, limits, upgrade, and the Stripe portal |
+| Models | Enable chat models and optional bring-your-own keys |
+| Users | Invite, edit roles, and remove people |
+| Groups | Grant category, classification, upload, and model access |
+| Categories | Build the folder tree for documents |
+| Classifications | Define sensitivity levels and ranks |
+| Audit Log | Review who changed what |
+
+## Roles in Admin Center
+
+- **Owner** — full control, including billing checkout and portal.
+- **Administrator** — day-to-day operations: users, groups, taxonomy, models. Cannot replace the owner.
+- **User** — no Admin Center. Chat and Documents only, scoped by groups.
+
+<Warning>
+  Plan limits apply while you work. If invite, group, category, or classification actions are disabled, the current plan is at capacity. Open **Plan & usage** to upgrade.
+</Warning>
+
+## Suggested setup order
+
+<Steps>
+  <Step title="Classifications">
+    Create levels such as Public, Internal, and Confidential with increasing ranks.
+  </Step>
+  <Step title="Categories">
+    Mirror how the company files knowledge: teams, products, or policy areas.
+  </Step>
+  <Step title="Models">
+    Enable the models your plan allows. Add provider API keys if you use bring-your-own-key.
+  </Step>
+  <Step title="Groups">
+    On Team or higher, create groups that map to those categories and classification ceilings, then invite users into them.
+  </Step>
+</Steps>
