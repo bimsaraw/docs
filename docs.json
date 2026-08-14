@@ -54,6 +54,13 @@
           "admin/billing",
           "admin/audit"
         ]
+      },
+      {
+        "group": "Security",
+        "icon": "lock",
+        "pages": [
+          "security"
+        ]
       }
     ]
   },

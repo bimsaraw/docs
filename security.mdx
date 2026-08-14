@@ -1,0 +1,134 @@
+---
+title: "Security and architecture"
+description: "How ScopeRAG enforces access at retrieval time, where data lives, and how it deploys."
+icon: "lock"
+keywords: ["security", "architecture", "encryption", "deployment", "compliance"]
+related: ["guides/access", "admin/audit", "admin/models"]
+---
+
+ScopeRAG is built so that access is a property of retrieval, not a filter applied after the fact. A user's permissions decide which passages are even eligible to be retrieved, so out-of-scope content never enters the model's context and cannot appear in an answer.
+
+This page explains the enforcement mechanism, how access is calculated, where your data lives, and what leaves your boundary.
+
+## How enforcement works
+
+Access is enforced at the chunk level, before retrieval, on every query.
+
+<Steps>
+  <Step title="Chunks inherit the document's access metadata">
+    When a file is processed, it is split into chunks for embedding. Each chunk carries the parent document's **classification rank** and **categories** as metadata alongside its vector. {/* CONFIRM: chunk metadata schema — that classification + category IDs are stored per-vector, not only per-document row */}
+  </Step>
+
+  <Step title="Every request resolves the user's effective scope">
+    On each query, ScopeRAG resolves the signed-in user's groups into an effective scope: the set of categories they may see and the maximum classification rank they may read. Composer filters can only narrow this scope further. {/* CONFIRM: effective scope is computed server-side per request from the user's group memberships, not cached on the client */}
+  </Step>
+
+  <Step title="Scope becomes a filter on the vector search">
+    The effective scope is compiled into a metadata filter that is applied to the similarity search itself. Chunks outside the user's categories or above their classification ceiling are excluded from the candidate set — they are never scored, never ranked, and never returned. {/* CONFIRM: this is a pre-filter on the ANN query (e.g. a metadata predicate passed to the vector store), NOT a post-retrieval filter over an unrestricted result set */}
+  </Step>
+
+  <Step title="Only in-scope passages reach the model">
+    The model receives only passages that survived the filter. Because exclusion happens before retrieval, no out-of-scope text is ever placed in the prompt, and citations can only reference documents the user is allowed to open.
+  </Step>
+</Steps>
+
+<Info>
+  The security consequence of pre-filtering: even a prompt-injection or jailbreak attempt cannot surface content the user lacks access to, because that content was never a retrieval candidate for their request. The model cannot reveal what it was never given.
+</Info>
+
+## How access is calculated
+
+A user's access is the resolved combination of every group they belong to. The combination follows fixed rules:
+
+| Dimension          | Rule across multiple groups                                             |
+| ------------------ | ---------------------------------------------------------------------- |
+| Categories         | **Union** — the user can see any category granted by any of their groups |
+| Classification     | **Maximum rank** — the user's ceiling is the highest level any group grants |
+| Can create documents | **Any** — enabled if any group enables it                            |
+| Allowed models     | **Union** — any model permitted by any group                           |
+
+A chunk is retrievable for a user only when **both** conditions hold: its category is in the user's category union **and** its classification rank is at or below the user's ceiling. The two axes are combined with AND, never OR.
+
+<Warning>
+  Because classification uses the maximum across groups, adding a user to a group with a higher ceiling raises their ceiling everywhere, not only for that group's categories. Review group ceilings before broad group assignments.
+</Warning>
+
+Administrators and owners are not group members; their access is granted by role rather than resolved from groups. See [Access and permissions](/guides/access) for the role model.
+
+## Deployment models
+
+ScopeRAG runs in whichever boundary your compliance posture requires. {/* CONFIRM: which of the tiers below you actually offer today vs roadmap — do not publish a tier you cannot deliver */}
+
+<Columns cols={2}>
+  <Card title="Managed cloud" icon="cloud">
+    Multi-tenant SaaS operated by ScopeRAG. Fastest to start. Each organization's documents, chunks, and vectors are isolated per tenant. {/* CONFIRM: isolation model — separate namespace/collection per org vs row-level tenant_id filtering */}
+  </Card>
+
+  <Card title="On-premises / private" icon="server">
+    Deployed inside your own cloud account or data center. Documents, embeddings, and the vector store never leave your infrastructure. Suited to regulated institutions with data-residency obligations. {/* CONFIRM: exact packaging — container images, Helm chart, VPC deployment, air-gap support */}
+  </Card>
+</Columns>
+
+<Info>
+  On-premises deployment keeps document content, extracted chunks, and vectors within your boundary. What leaves the boundary is limited to model inference — and that too can be kept internal with a self-hosted model. See below.
+</Info>
+
+## Data flow to the model provider
+
+Generating an answer sends the user's question and the retrieved in-scope passages to a chat model. Where that model runs depends on your configuration.
+
+| Configuration        | What happens to query + passages                                          |
+| -------------------- | ------------------------------------------------------------------------- |
+| Platform keys        | Sent to the model provider through ScopeRAG's credentials                 |
+| Bring your own key   | Sent to the same providers through **your** provider account and contractual terms {/* CONFIRM: BYOK routes to the customer's own provider account */} |
+| Self-hosted model    | Never leaves your boundary; inference runs on a model you host {/* CONFIRM: whether a self-hosted / local model option exists today */} |
+
+<Warning>
+  Retrieved passages are only ever in-scope for the requesting user, so the model never receives content that user could not already read. Choosing BYOK or a self-hosted model controls **which third party**, if any, sees that in-scope content.
+</Warning>
+
+Only classifications and categories the user is cleared for can appear in a prompt, but the passages themselves are real document text. For workloads where no content may reach an external provider, use a self-hosted model.
+
+## Data at rest and in transit
+
+* Documents, extracted text, and vectors are encrypted at rest. {/* CONFIRM: encryption at rest for blob storage + vector store + database */}
+* Traffic is encrypted in transit over TLS.
+* Provider API keys supplied for bring-your-own-key are stored encrypted and are never returned to the client or placed in prompts.
+
+<Warning>
+  Do not paste API keys, credentials, or secrets into chat or documents. Store provider keys only on the [Models](/admin/models) page.
+</Warning>
+
+## Deletion and retention
+
+Deleting a document removes the file and its derived chunks and vectors, so the content is no longer a retrieval candidate for any user. {/* CONFIRM: delete cascades to chunk + vector purge, not only the document row */}
+
+<Info>
+  Deletion affects future retrieval. It does not rewrite past chat transcripts, which may still quote passages from a document that has since been deleted. Delete conversations separately if a transcript must not retain quoted content.
+</Info>
+
+Retention of documents, conversations, and audit records follows your plan and, for on-premises deployments, your own storage lifecycle. {/* CONFIRM: any configurable retention windows */}
+
+## Access and change auditing
+
+Security-relevant activity is recorded in the [Audit log](/admin/audit): sign-ins, invitations, role and group changes, and document create, edit, and delete events. Filter by actor, action, and date range, and export the current view for review or evidence. {/* CONFIRM: whether retrieval-level events (which user retrieved which documents for which query, and access decisions) are logged — if so, document them here, as this is the audit surface regulated buyers ask for */}
+
+## Common questions
+
+<AccordionGroup>
+  <Accordion title="Can a chat filter or a clever prompt widen my access?">
+    No. Composer filters can only narrow retrieval within your resolved scope, and enforcement happens before retrieval, so no prompt can cause out-of-scope passages to be retrieved or cited.
+  </Accordion>
+
+  <Accordion title="Is access enforced per chunk or per document?">
+    Per chunk. Each chunk carries its parent document's classification and categories, and the retrieval filter is applied at the chunk level, so a document's passages are only ever eligible for users cleared for that document.
+  </Accordion>
+
+  <Accordion title="Does our document content leave our environment?">
+    In managed cloud, retrieved in-scope passages are sent to the configured model provider to generate answers. With bring-your-own-key this goes through your own provider account; with a self-hosted model or an on-premises deployment, content stays within your boundary. {/* CONFIRM to match offered tiers */}
+  </Accordion>
+
+  <Accordion title="Do you support SSO?">
+    {/* CONFIRM: SSO/SAML/OIDC status. If roadmap, say so plainly rather than omitting — enterprise buyers ask on the first call. */}
+  </Accordion>
+</AccordionGroup>
