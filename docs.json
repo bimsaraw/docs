@@ -3,11 +3,18 @@
   "theme": "mint",
   "name": "ScopeRAG",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#0891B2",
+    "light": "#E2E8F0",
+    "dark": "#0E7490"
+  },
+  "background": {
+    "color": {
+      "light": "#FFFFFF",
+      "dark": "#020618"
+    }
   },
   "favicon": "/favicon.svg",
+  "css": ["/custom.css"],
   "navigation": {
     "pages": [
       {
@@ -29,7 +36,7 @@
       },
       {
         "group": "Using ScopeRAG",
-        "icon": "message-square",
+        "icon": "comment",
         "pages": [
           "guides/chat",
           "guides/access",
@@ -58,13 +65,13 @@
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "mailto:support@scoperag.com"
       }
     ],
     "primary": {
       "type": "button",
       "label": "Dashboard",
-      "href": "https://app.mintlify.com"
+      "href": "https://app.scoperag.com"
     }
   },
   "contextual": {
@@ -78,13 +85,6 @@
       "cursor",
       "vscode"
     ]
-  },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
-    }
   },
   "description": "Learn how to sign in, upload documents, ask questions, and manage access in ScopeRAG."
 }

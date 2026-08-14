@@ -14,22 +14,22 @@ Open **Admin Center** → **Plan & usage** (owners and administrators). Other me
 
 Meters appear throughout the app when you approach a limit (users, files, storage, and similar).
 
-## Upgrade with Stripe
+## Upgrade to a Paid Plan
 
-Owners and administrators can start Checkout for **Starter**, **Team**, or **Business**, billed monthly or yearly.
+Owners and administrators can subscribe to **Starter**, **Team**, or **Business**, billed monthly or yearly.
 
 <Steps>
   <Step title="Choose a plan">
     On Plan & usage, pick Starter, Team, or Business and a billing interval.
   </Step>
-  <Step title="Complete Checkout">
-    You are redirected to Stripe. After payment you return to `/admin/billing?checkout=success`. Canceling returns with `checkout=canceled`.
+  <Step title="Complete payment">
+    Enter your payment details to complete the subscription.
   </Step>
-  <Step title="Wait for sync">
-    Plan and credits update when Stripe webhooks arrive. Refresh if the UI still shows the previous plan for a moment.
+  <Step title="Confirm your plan">
+    Plan and credits update shortly after payment. Refresh the page if it still shows your previous plan.
   </Step>
 </Steps>
 
-If the organization already has an active paid subscription, use the **billing portal** to change plans, update the payment method, or cancel. Checkout returns an error in that case instead of starting a second subscription.
+If the organization already has an active paid subscription, use the **billing portal** to change plans, update the payment method, or cancel.
 
-Free and Enterprise are not sold through this Checkout flow.
+Free and Enterprise are not available through self-serve upgrade.

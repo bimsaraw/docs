@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node \"C:\\\\Users\\\\bimsaraw\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-bimsaraw-SaaS-docs\\\\8e1c7ee1-f7b5-461c-ac56-aa4df5172662\\\\scratchpad\\\\oklch2hex.js\")",
+      "WebFetch(domain:mintlify.com)",
+      "WebSearch",
+      "WebFetch(domain:www.mintlify.com)",
+      "Bash(curl -s https://mintlify.com/docs.json -o \"C:\\\\Users\\\\bimsaraw\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-bimsaraw-SaaS-docs\\\\8e1c7ee1-f7b5-461c-ac56-aa4df5172662\\\\scratchpad\\\\mintlify-schema.json\")",
+      "Bash(node -e ' *)",
+      "Bash(curl -s https://mintlify.com/docs.json -o /c/Users/bimsaraw/AppData/Local/Temp/claude/c--Users-bimsaraw-SaaS-docs/8e1c7ee1-f7b5-461c-ac56-aa4df5172662/scratchpad/mintlify-schema.json)",
+      "Bash(curl -sL https://mintlify.com/docs.json -o /c/Users/bimsaraw/AppData/Local/Temp/claude/c--Users-bimsaraw-SaaS-docs/8e1c7ee1-f7b5-461c-ac56-aa4df5172662/scratchpad/mintlify-schema.json)",
+      "Bash(curl -sL \"https://scope-rag.mintlify.app/\" -o \"/c/Users/bimsaraw/AppData/Local/Temp/claude/c--Users-bimsaraw-SaaS-docs/8e1c7ee1-f7b5-461c-ac56-aa4df5172662/scratchpad/live.html\" -w \"HTTP %{http_code}\\\\n\")",
+      "Read(//c/Users/bimsaraw/AppData/Local/Temp/claude/c--Users-bimsaraw-SaaS-docs/8e1c7ee1-f7b5-461c-ac56-aa4df5172662/scratchpad/**)",
+      "Bash(curl -sL https://scope-rag.mintlify.app/mintlify-assets/_next/static/chunks/a2c16a79b30ca688.css?dpl=dpl_AGfXpPaqf6KjcvwwxstSTtD7rjiM -o /c/Users/bimsaraw/AppData/Local/Temp/claude/c--Users-bimsaraw-SaaS-docs/8e1c7ee1-f7b5-461c-ac56-aa4df5172662/scratchpad/mint1.css -w 'HTTP %{http_code} size:%{size_download}\\\\n')",
+      "Bash(curl -sL https://scope-rag.mintlify.app/mintlify-assets/_next/static/chunks/7e5687617f8abacb.css?dpl=dpl_AGfXpPaqf6KjcvwwxstSTtD7rjiM -o /c/Users/bimsaraw/AppData/Local/Temp/claude/c--Users-bimsaraw-SaaS-docs/8e1c7ee1-f7b5-461c-ac56-aa4df5172662/scratchpad/mint2.css -w 'HTTP %{http_code} size:%{size_download}\\\\n')",
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('docs.json','utf8'\\)\\); console.log\\('valid json'\\)\")",
+      "Bash(SCRATCH=\"/c/Users/bimsaraw/AppData/Local/Temp/claude/c--Users-bimsaraw-SaaS-docs/8e1c7ee1-f7b5-461c-ac56-aa4df5172662/scratchpad\" *)",
+      "Bash(curl -sL https://scope-rag.mintlify.app/guides/chat -o /c/Users/bimsaraw/AppData/Local/Temp/claude/c--Users-bimsaraw-SaaS-docs/8e1c7ee1-f7b5-461c-ac56-aa4df5172662/scratchpad/live-chat.html -w 'HTTP %{http_code}\\\\n')"
+    ]
+  }
+}
