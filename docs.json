@@ -13,7 +13,7 @@
       "dark": "#020618"
     }
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon.png",
   "css": ["/custom.css"],
   "navigation": {
     "pages": [
